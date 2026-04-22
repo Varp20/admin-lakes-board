@@ -11,8 +11,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
-  color: #172033;
+  background: #03fc9c;
+  color: #002470;
 }
 
 a {
@@ -34,8 +34,8 @@ textarea {
 }
 
 .sidebar {
-  background: #12213c;
-  color: white;
+  background: #7aa4f1;
+  color: rgb(51, 7, 7);
   padding: 24px 18px;
 }
 
@@ -46,7 +46,7 @@ textarea {
 
 .sidebar p {
   margin: 0 0 24px;
-  color: #b7c5e0;
+  color: #0e295f;
   font-size: 14px;
 }
 
@@ -150,7 +150,7 @@ textarea {
   opacity: 0.65;
   cursor: not-allowed;
 }
-
+a
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -238,4 +238,78 @@ hr.soft {
   .sidebar {
     padding-bottom: 12px;
   }
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Заменили яркий фон на спокойный светло-серый */
+  background: #f0f2f5; 
+  color: #1a1d23;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr; /* Чуть расширили сайдбар */
+  min-height: 100vh;
+}
+
+.sidebar {
+  /* Сделали сайдбар темным и статусным */
+  background: #1e293b; 
+  color: #ffffff;
+  padding: 30px 20px;
+}
+
+.sidebar h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: #38bdf8; /* Акцентный голубой */
+}
+
+.nav a {
+  padding: 12px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: #cbd5e1;
+}
+
+.nav a.active,
+.nav a:hover {
+  background: #334155;
+  color: #fff;
+  border-left: 4px solid #38bdf8; /* Добавили полоску при ховере */
+}
+
+.card {
+  background: white;
+  border-radius: 12px; /* Чуть уменьшили скругление для строгости */
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.btn {
+  border: none;
+  background: #0284c7;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #0369a1;
 }
