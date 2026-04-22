@@ -9,6 +9,7 @@ const emptyForm = {
   login: '',
   role: 'CLIENT' as 'ADMIN' | 'CLIENT',
   password: '',
+  avatarUrl: '', 
 };
 
 export function UserManager() {
@@ -57,6 +58,7 @@ export function UserManager() {
           email: form.email,
           login: form.login,
           role: form.role,
+          avatarUrl: form.avatarUrl,
           ...(form.password.trim() ? { password: form.password } : {}),
         });
       } else {
@@ -65,6 +67,7 @@ export function UserManager() {
           login: form.login,
           role: form.role,
           password: form.password,
+          avatarUrl: form.avatarUrl,
         });
       }
 
@@ -122,15 +125,14 @@ export function UserManager() {
             </select>
           </label>
 
-          <label className="field">
-            <span>Password</span>
-            <input
-              type="password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              placeholder={editingId ? 'Оставьте пустым, чтобы не менять' : ''}
-            />
-          </label>
+<label className="field">
+  <span>Avatar URL</span>
+  <input
+    value={form.avatarUrl}
+    onChange={(e) => setForm({ ...form, avatarUrl: e.target.value })}
+    placeholder="https://..."
+  />
+</label>
         </div>
 
         <div className="actions">
@@ -156,52 +158,63 @@ export function UserManager() {
         {loading ? <p>Loading...</p> : null}
         {error ? <p>{error}</p> : null}
 
-        <div className="table-wrap">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Login</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
+<div className="table-wrap">
+  <table className="table">
+    <thead>
+      <tr>
+        {/* Добавили заголовок */}
+        <th>Аватар</th> 
+        <th>Login</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.login || '—'}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <span className="badge">{user.role}</span>
-                  </td>
-                  <td>
-                    <div className="actions">
-                      <button
-                        className="btn secondary"
-                        onClick={() => {
-                          setEditingId(user.id);
-                          setForm({
-                            email: user.email,
-                            login: user.login || '',
-                            role: user.role,
-                            password: '',
-                          });
-                        }}
-                      >
-                        Edit
-                      </button>
+    <tbody>
+      {users.map((user) => (
+        <tr key={user.id}>
+          {/* Добавили ячейку с самой картинкой */}
+<td>
+  {user.avatarUrl ? (
+    <img src={user.avatarUrl} alt="ava" className="avatar-small" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
+  ) : (
+    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#eee' }} />
+  )}
+</td>
+          <td>{user.login || '—'}</td>
+          <td>{user.email}</td>
+          <td>
+            <span className="badge">{user.role}</span>
+          </td>
+          <td>
+            <div className="actions">
+              <button
+                className="btn secondary"
+                onClick={() => {
+                  setEditingId(user.id);
+                  setForm({
+                    email: user.email,
+                    login: user.login || '',
+                    role: user.role,
+                    password: '',
+                    avatarUrl: user.avatarUrl || '', // НЕ ЗАБУДЬ добавить это сюда, чтобы при редактировании ссылка подтягивалась в форму
+                  });
+                }}
+              >
+                Edit
+              </button>
 
-                      <button
-                        className="btn danger"
-                        onClick={() => void remove(user.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              <button
+                className="btn danger"
+                onClick={() => void remove(user.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      ))}
 
               {!loading && users.length === 0 ? (
                 <tr>
